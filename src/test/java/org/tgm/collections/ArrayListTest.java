@@ -43,4 +43,19 @@ public class ArrayListTest {
             Assert.assertEquals(i + 1, arrayListUnderTest.size());
         }
     }
+
+    @Test
+    public void shouldSupportIndexBasedInsert() {
+
+        final int expectedSize = 1000;
+        for (int i = 0; i < expectedSize; ++i) {
+            arrayListUnderTest.add(0, i + 1);
+        }
+
+        Assert.assertEquals(expectedSize, arrayListUnderTest.size());
+
+        for (int i = 0; i < expectedSize; ++i) {
+            Assert.assertEquals(i + 1, (int) arrayListUnderTest.get(i));
+        }
+    }
 }
