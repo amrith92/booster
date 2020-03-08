@@ -33,4 +33,14 @@ public class ArrayListTest {
         arrayListUnderTest.remove(0);
         Assert.assertEquals(0, arrayListUnderTest.size());
     }
+
+    @Test
+    public void shouldReportTheCorrectSize() {
+
+        Assert.assertEquals(0, arrayListUnderTest.size());
+
+        for (int i = 0; i < 10000; ++i) {
+            Assert.assertEquals(i + 1, arrayListUnderTest.size());
+        }
+    }
 }
