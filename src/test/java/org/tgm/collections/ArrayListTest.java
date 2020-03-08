@@ -35,11 +35,18 @@ public class ArrayListTest {
     }
 
     @Test
+    public void shouldReportZeroSize()  {
+
+        Assert.assertEquals(0, arrayListUnderTest.size());
+    }
+
+    @Test
     public void shouldReportTheCorrectSize() {
 
         Assert.assertEquals(0, arrayListUnderTest.size());
 
         for (int i = 0; i < 10000; ++i) {
+            arrayListUnderTest.add(i);
             Assert.assertEquals(i + 1, arrayListUnderTest.size());
         }
     }
