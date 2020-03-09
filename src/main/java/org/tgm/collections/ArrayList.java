@@ -1,13 +1,12 @@
 package org.tgm.collections;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class ArrayList<T> implements List<T> {
 
     private int count = 0;
+    private static final int DEFAULT_SIZE = 10;
+    private Object[] array = new Object[DEFAULT_SIZE];
 
     @Override
     public int size() {
@@ -16,7 +15,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
 
     @Override
@@ -41,8 +40,16 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean add(T t) {
-        count++;
-        return false;
+        // Check if array has free space
+        // if not put the data into the first empty index.
+        //  and increment the count
+        //if arr is fill increase the size of array by doubling it. copy old array into new array.
+        // increment the count
+        if (count >= array.length) {
+            this.array = Arrays.copyOf(array, array.length *2);
+        }
+        array[count++] = t;
+        return true;
     }
 
     @Override
@@ -82,7 +89,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        return (T) array[index];
     }
 
     @Override
@@ -92,6 +99,15 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
+        //create new array of double size
+        // copy old into new array
+        // then add element
+
+        if (index >= array.length) {
+            this.array = Arrays.copyOf(array, array.length*2);
+        }
+        array[index] = element;
+        count++;
 
     }
 
