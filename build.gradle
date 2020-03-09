@@ -25,6 +25,7 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
+        xml.destination file("${buildDir}/jacoco/report.xml")
         html.destination file("${buildDir}/jacocoHtml")
     }
 }
@@ -42,4 +43,5 @@ sonarqube {
 
 task buildAndVerify() {
     dependsOn project.tasks["sonarqube"]
+    dependsOn jacocoTestReport
 }
