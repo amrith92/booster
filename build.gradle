@@ -41,5 +41,5 @@ sonarqube {
 }
 
 task buildAndVerify() {
-    dependsOn sonarqube
+    dependsOn project.tasks["sonarqube"]
 }
