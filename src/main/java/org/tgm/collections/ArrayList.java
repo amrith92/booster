@@ -54,6 +54,14 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object o) {
+        int n = array.length;
+        for (int i = 0; i < n; i++) {
+            if (array[i] == o) {
+                array[i] = array[i+1];
+                count--;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -113,7 +121,19 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        return null;
+        if (index < size()) {
+            T temp = null;
+            temp = (T) array[index];
+            while (index < size()) {
+                array[index] = array[index + 1];
+                index++;
+            }
+            count--;
+            return temp;
+        } else {
+            throw new IndexOutOfBoundsException("given index is not exist.");
+        }
+
     }
 
     @Override

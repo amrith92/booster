@@ -2,7 +2,6 @@ package org.tgm.collections;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ArrayListTest {
@@ -25,8 +24,7 @@ public class ArrayListTest {
     }
 
     @Test
-    @Ignore
-    public void shouldSupportIndexBasedRemove() {
+    public void should_RemoveByIndex_WhenValidIndexProvided() {
 
         arrayListUnderTest.add(1);
 
@@ -34,6 +32,26 @@ public class ArrayListTest {
 
         arrayListUnderTest.remove(0);
         Assert.assertEquals(0, arrayListUnderTest.size());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldFail_RemoveByIndex_WhenIndexOutOfUpperBound() {
+        arrayListUnderTest.add(1);
+        arrayListUnderTest.add(2);
+        Assert.assertEquals(2, arrayListUnderTest.size());
+
+        arrayListUnderTest.remove(2);
+        Assert.fail("Index does not exist.");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldFail_RemoveByIndex_WhenIndexOutOfLowerBound() {
+        arrayListUnderTest.add(1);
+        arrayListUnderTest.add(2);
+        Assert.assertEquals(2, arrayListUnderTest.size());
+
+        arrayListUnderTest.remove(-1);
+        Assert.fail("Index does not exist.");
     }
 
     @Test
@@ -66,5 +84,25 @@ public class ArrayListTest {
         for (int i = 0; i < expectedSize; ++i) {
             Assert.assertEquals(i + 1, (int) arrayListUnderTest.get(i));
         }
+    }
+    @Test
+    public void shouldSupportRemoveByElement() {
+
+
+        arrayListUnderTest.add(1);
+
+        arrayListUnderTest.remove(Integer.valueOf(1));
+        Assert.assertEquals(0, arrayListUnderTest.size());
+    }
+
+    @Test
+    public void shouldFail_RemoveElement_WhenElementDoesNotExist() {
+        arrayListUnderTest.add(1);
+        arrayListUnderTest.add(2);
+
+        arrayListUnderTest.add(3);
+
+        final boolean result = arrayListUnderTest.remove(Integer.valueOf(4));
+        Assert.assertFalse(result);
     }
 }
